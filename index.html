@@ -7,15 +7,19 @@
     body {
       margin: 0;
       padding: 0;
-      background: linear-gradient(#ff9a9e, #fad0c4);
+      height: 100vh;
+      background: linear-gradient(to top right, #ff758c, #ff7eb3);
       font-family: Arial, sans-serif;
       text-align: center;
       color: white;
+      overflow: hidden;
     }
 
     .box {
-      margin-top: 100px;
+      position: relative;
+      top: 20%;
       padding: 20px;
+      z-index: 2;
     }
 
     h1 {
@@ -27,8 +31,12 @@
       margin: 20px;
     }
 
+    h2 {
+      margin-top: 30px;
+    }
+
     button {
-      padding: 15px 25px;
+      padding: 15px 30px;
       font-size: 18px;
       border: none;
       border-radius: 30px;
@@ -42,13 +50,38 @@
       background: #ff4d6d;
       color: white;
     }
+
+    /* Flying hearts */
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      font-size: 20px;
+      animation: fly 6s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes fly {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 
 <body>
 
+  <!-- Background Music -->
+  <audio autoplay loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+  </audio>
+
   <div class="box">
-    <h1>Happy Propose Day Bubu❤️</h1>
+    <h1>Happy Propose Day ❤️</h1>
 
     <p>
       Jab se tum meri zindagi me aayi ho,  
@@ -69,6 +102,22 @@
     function yesClicked() {
       alert("Yayyy! Tumne YES bola ❤️🥰\nMain hamesha tumhara rahunga!");
     }
+
+    // Create flying hearts
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }
+
+    setInterval(createHeart, 300);
   </script>
 
 </body>
